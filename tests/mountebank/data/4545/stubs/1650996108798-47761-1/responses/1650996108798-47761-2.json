@@ -1,0 +1,15 @@
+{
+  "proxy": {
+    "to": "localhost:8081",
+    "mode": "proxyOnce",
+    "predicateGenerators": [
+      {
+        "matches": {
+          "path": true,
+          "value": true
+        },
+        "caseSensitive": true
+      }
+    ]
+  }
+}

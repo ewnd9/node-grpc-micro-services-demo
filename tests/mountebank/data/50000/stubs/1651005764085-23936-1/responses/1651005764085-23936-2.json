@@ -1,0 +1,16 @@
+{
+  "proxy": {
+    "to": "https://swapi.dev",
+    "mode": "proxyOnce",
+    "predicateGenerators": [
+      {
+        "matches": {
+          "path": true,
+          "query": true,
+          "body": true
+        },
+        "caseSensitive": true
+      }
+    ]
+  }
+}

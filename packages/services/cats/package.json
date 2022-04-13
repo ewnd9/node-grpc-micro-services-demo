@@ -1,0 +1,13 @@
+{
+  "name": "@internal/cats",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start:dev": "ts-node ./src",
+    "build": "rm -rf dist && tsc"
+  },
+  "dependencies": {
+    "@internal/cats-api": "0.0.0",
+    "@internal/grpc-server": "0.0.0"
+  }
+}

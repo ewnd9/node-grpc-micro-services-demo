@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package cats;
+
+service CatsService {
+  rpc GetCatsList(GetCatsListRequest) returns (GetCatsListResponse) {}
+}
+
+message GetCatsListRequest {
+  int64 id = 1;
+}
+
+message Cat {
+  string name = 1;
+}
+
+message GetCatsListResponse {
+  repeated Cat cats = 1;
+}

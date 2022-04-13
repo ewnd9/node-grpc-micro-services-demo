@@ -1,0 +1,18 @@
+{
+  "is": {
+    "value": {
+      "cats": [
+        {
+          "name": "cat"
+        }
+      ]
+    },
+    "metadata": {
+      "initial": {
+        "date": "Tue, 26 Apr 2022 18:02:30 GMT"
+      },
+      "trailing": {}
+    },
+    "_proxyResponseTime": 10
+  }
+}

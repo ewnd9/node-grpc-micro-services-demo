@@ -1,0 +1,38 @@
+{
+  "protocol": "http",
+  "port": 50000,
+  "loglevel": "debug",
+  "recordRequests": false,
+  "stubs": [
+    {
+      "meta": {
+        "dir": "stubs/1651005785212-23936-3"
+      },
+      "predicates": [
+        {
+          "caseSensitive": true,
+          "deepEquals": {
+            "path": "/api/people"
+          }
+        },
+        {
+          "caseSensitive": true,
+          "deepEquals": {
+            "query": {}
+          }
+        },
+        {
+          "caseSensitive": true,
+          "deepEquals": {
+            "body": ""
+          }
+        }
+      ]
+    },
+    {
+      "meta": {
+        "dir": "stubs/1651005764085-23936-1"
+      }
+    }
+  ]
+}

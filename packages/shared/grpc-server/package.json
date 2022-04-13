@@ -1,0 +1,13 @@
+{
+  "name": "@internal/grpc-server",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc"
+  },
+  "dependencies": {
+    "nice-grpc": "^1.1.1",
+    "nice-grpc-server-reflection": "^1.0.11"
+  }
+}

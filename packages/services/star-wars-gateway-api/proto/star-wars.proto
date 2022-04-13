@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package star_wars;
+
+service StarWarsService {
+  rpc GetPersonsList(GetPersonsListRequest) returns (GetPersonsListResponse) {}
+}
+
+message GetPersonsListRequest {}
+
+message Person {
+  string name = 1;
+  int32 height = 2;
+  int32 mass = 3;
+}
+
+message GetPersonsListResponse {
+  repeated Person persons = 1;
+}

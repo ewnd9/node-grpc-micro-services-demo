@@ -1,0 +1,39 @@
+{
+  "protocol": "grpc",
+  "port": 4545,
+  "loglevel": "debug",
+  "recordRequests": false,
+  "services": {
+    "cats.CatsService": {
+      "file": "cats.proto"
+    }
+  },
+  "options": {
+    "protobufjs": {
+      "includeDirs": [
+        "packages/services/cats-api/proto"
+      ]
+    }
+  },
+  "stubs": [
+    {
+      "responses": [
+        {
+          "proxy": {
+            "to": "localhost:8081",
+            "mode": "proxyOnce",
+            "predicateGenerators": [
+              {
+                "matches": {
+                  "path": true,
+                  "value": true
+                },
+                "caseSensitive": true
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

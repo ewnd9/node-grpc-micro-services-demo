@@ -1,0 +1,9 @@
+node_modules
+dist
+*.log
+*.pid
+.turbo
+.turbo-prune
+.eslintcache
+.env*
+!.env.example

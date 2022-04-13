@@ -1,0 +1,67 @@
+{
+  "protocol": "grpc",
+  "port": 4545,
+  "loglevel": "debug",
+  "recordRequests": false,
+  "services": {
+    "cats.CatsService": {
+      "file": "cats.proto"
+    }
+  },
+  "options": {
+    "protobufjs": {
+      "includeDirs": [
+        "packages/services/cats-api/proto"
+      ]
+    }
+  },
+  "stubs": [
+    {
+      "meta": {
+        "dir": "stubs/1650996132721-47761-3"
+      },
+      "predicates": [
+        {
+          "caseSensitive": true,
+          "deepEquals": {
+            "path": "/cats.CatsService/GetCatsList"
+          }
+        },
+        {
+          "caseSensitive": true,
+          "deepEquals": {
+            "value": {
+              "id": "0"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "meta": {
+        "dir": "stubs/1650996150754-47761-5"
+      },
+      "predicates": [
+        {
+          "caseSensitive": true,
+          "deepEquals": {
+            "path": "/cats.CatsService/GetCatsList"
+          }
+        },
+        {
+          "caseSensitive": true,
+          "deepEquals": {
+            "value": {
+              "id": "12341234"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "meta": {
+        "dir": "stubs/1650996108798-47761-1"
+      }
+    }
+  ]
+}

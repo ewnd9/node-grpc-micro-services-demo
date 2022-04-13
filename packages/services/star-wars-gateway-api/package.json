@@ -1,0 +1,11 @@
+{
+  "name": "@internal/star-wars-gateway-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf dist && tooling build-proto"
+  },
+  "dependencies": {
+    "@internal/tooling": "0.0.0"
+  }
+}
