@@ -2,13 +2,26 @@ image: docker:20.10.14
 
 ci:
   services:
-    - docker:20.10.14-dind
+    - name: docker:20.10.14-dind
+    - name: ewnd9/turborepo-remote-cache:bd6a03ba73c93583da556e5fad99c74478ef8d9c
+      alias: turborepo-remote-cache
   variables:
+    # turbo/internal
+    TURBO_API: http://turborepo-remote-cache:8080
+    TURBO_TEAMID: team_1
+    TURBO_TOKEN: $TURBO_TOKEN
+    # turbo/custom
     TURBO_DOCKER_IMAGE_PREFIX: $CI_REGISTRY/$CI_PROJECT_PATH
+    # turborepo-remote-cache
+    TURBO_TOKEN: $TURBO_TOKEN
+    PORT: 8080
+    STORAGE_PROVIDER: gitlab-package-registry
+    # can't use it for packages API (https://gitlab.com/gitlab-org/gitlab/-/issues/292608)
+    # GITLAB_TOKEN: $CI_JOB_TOKEN
+    GITLAB_TOKEN: $GITLAB_TOKEN
+    GITLAB_REPO_PATH: $CI_PROJECT_PATH
   script:
     - apk update && apk add --no-cache git make protobuf-dev nodejs yarn
     - yarn install
-    - yarn turbo run build:turbo
-
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - yarn turbo run build:docker

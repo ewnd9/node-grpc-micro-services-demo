@@ -14,6 +14,13 @@ export async function turboDocker() {
   });
 
   const turboHash = readTurboHash();
+  const image = `${TURBO_DOCKER_IMAGE_PREFIX}/${pkgName.split('/').pop()}:${turboHash}`;
+
+  if (isCI && (await isDockerImageExists(image))) {
+    console.log(`${image} already exists`);
+    return;
+  }
+
   const { stdout: rootDir } = await execa(`git rev-parse --show-toplevel`, {
     shell: true,
   });
@@ -34,7 +41,6 @@ export async function turboDocker() {
     cwd: rootDir,
   });
 
-  const image = `${TURBO_DOCKER_IMAGE_PREFIX}/${pkgName.split('/').pop()}:${turboHash}`;
   await execa(`docker build -t ${image} --label "GIT_SHA=${gitSha}" .`, {
     shell: true,
     cwd: `${rootDir}/${distDir}`,
@@ -43,11 +49,6 @@ export async function turboDocker() {
   console.log(`${image} created`);
 
   if (!isCI) {
-    return;
-  }
-
-  if (await isDockerImageExists(image)) {
-    console.log(`${image} already exists`);
     return;
   }
 
