@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start:dev": "ts-node ./src",
-    "build": "rm -rf dist && tooling build-proto",
-    "build:docker": "tooling turbo-docker"
+    "build": "rm -rf dist && tooling build-proto"
   },
   "dependencies": {
     "@internal/tooling": "0.0.0"

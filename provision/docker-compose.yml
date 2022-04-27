@@ -1,0 +1,16 @@
+version: '3'
+services:
+  cats:
+    image: registry.gitlab.com/ewnd9/node-grpc-micro-services-demo/cats:475420fe06ede309
+    command: ["node", "packages/services/cats/dist"]
+    ports:
+      - "50000:8080"
+    environment:
+      NODE_ENV: production
+  star-wars-gateway:
+    image: registry.gitlab.com/ewnd9/node-grpc-micro-services-demo/star-wars-gateway:7ce767748cc8135b
+    command: ["node", "packages/services/star-wars-gateway/dist"]
+    ports:
+      - "50001:8080"
+    environment:
+      NODE_ENV: production

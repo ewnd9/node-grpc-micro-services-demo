@@ -14,6 +14,10 @@ async function main() {
       const { buildProto } = await import('./build-proto');
       await buildProto();
     },
+    async 'turbo-build'() {
+      const { turboBuild } = await import('./turbo-build');
+      await turboBuild();
+    },
     async 'turbo-docker'() {
       const { turboDocker } = await import('./turbo-docker');
       await turboDocker();

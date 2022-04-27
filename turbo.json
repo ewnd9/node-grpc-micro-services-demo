@@ -4,10 +4,14 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ""]
+      "outputs": ["dist/**"]
+    },
+    "build:turbo": {
+      "dependsOn": ["build"],
+      "outputs": ["dist/**"]
     },
     "build:docker": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build:turbo"]
     }
   }
 }

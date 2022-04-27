@@ -5,6 +5,7 @@
   "scripts": {
     "start:dev": "ts-node ./src",
     "build": "rm -rf dist && tsc",
+    "build:turbo": "tooling turbo-build",
     "build:docker": "tooling turbo-docker"
   },
   "dependencies": {

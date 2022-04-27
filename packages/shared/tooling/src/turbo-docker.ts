@@ -1,12 +1,19 @@
 import execa from 'execa';
-import { cleanEnv, str } from 'envalid';
+import { bool, cleanEnv, str } from 'envalid';
+import { readTurboHash } from './utils/read-turbo-hash';
 
 export async function turboDocker() {
-  const { TURBO_HASH, npm_package_name: pkgName } = cleanEnv(process.env, {
-    TURBO_HASH: str(),
+  const {
+    CI: isCI,
+    npm_package_name: pkgName,
+    TURBO_DOCKER_IMAGE_PREFIX,
+  } = cleanEnv(process.env, {
+    CI: bool({ default: false }),
     npm_package_name: str(),
+    TURBO_DOCKER_IMAGE_PREFIX: str({ default: 'test' }),
   });
 
+  const turboHash = readTurboHash();
   const { stdout: rootDir } = await execa(`git rev-parse --show-toplevel`, {
     shell: true,
   });
@@ -27,11 +34,44 @@ export async function turboDocker() {
     cwd: rootDir,
   });
 
-  const image = `${pkgName.split('/').pop()}:${TURBO_HASH}`;
+  const image = `${TURBO_DOCKER_IMAGE_PREFIX}/${pkgName.split('/').pop()}:${turboHash}`;
   await execa(`docker build -t ${image} --label "GIT_SHA=${gitSha}" .`, {
     shell: true,
     cwd: `${rootDir}/${distDir}`,
   });
 
   console.log(`${image} created`);
+
+  if (!isCI) {
+    return;
+  }
+
+  if (await isDockerImageExists(image)) {
+    console.log(`${image} already exists`);
+    return;
+  }
+
+  await execa(`docker push ${image}`, {
+    shell: true,
+  });
+  console.log(`${image} pushed`);
+}
+
+async function isDockerImageExists(image: string) {
+  let isDockerExists: boolean;
+
+  try {
+    await execa(`docker manifest inspect ${image}`, {
+      shell: true,
+      env: {
+        DOCKER_CLI_EXPERIMENTAL: 'enabled',
+      },
+    });
+
+    isDockerExists = true;
+  } catch (err) {
+    isDockerExists = false;
+  }
+
+  return isDockerExists;
 }
