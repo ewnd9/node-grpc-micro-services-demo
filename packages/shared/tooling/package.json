@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "bin": {
-    "tooling": "./dist/cli.js"
+    "tooling": "./cli.js"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc && chmod +x ./dist/cli.js"
+    "build": "rm -rf dist && tsc"
   },
   "dependencies": {
     "envalid": "^7.3.1",
