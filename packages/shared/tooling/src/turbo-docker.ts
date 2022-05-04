@@ -1,5 +1,6 @@
 import execa from 'execa';
 import { bool, cleanEnv, str } from 'envalid';
+import { promises as fs } from 'fs';
 import { readTurboHash } from './utils/read-turbo-hash';
 
 export async function turboDocker() {
@@ -40,6 +41,9 @@ export async function turboDocker() {
     shell: true,
     cwd: rootDir,
   });
+
+  const pkgPath = process.cwd().replace(`${rootDir}/`, '');
+  await fs.appendFile(`${rootDir}/${distDir}/Dockerfile`, `CMD ["node", "${pkgPath}/dist"]\n`);
 
   await execa(`docker build -t ${image} --label "GIT_SHA=${gitSha}" .`, {
     shell: true,

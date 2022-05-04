@@ -15,3 +15,4 @@ RUN yarn install \
   rm -rf /usr/local/share/.cache/yarn/v6
 
 COPY ${DIST_DIR}/out/full .
+# cmd will be injected by turbo
