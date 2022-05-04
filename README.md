@@ -3,14 +3,14 @@
 - [x] build docker images via `turbo`
 - [x] validate external api requests via `ajv`
 - [x] `husky` / `lint-staged`
+- [x] deploy locally to local k8s (`$ ./provision/deploy.sh`)
 - [ ] package code generation
-- [ ] deploy locally to `kind` / `k3s`
 - [ ] integration test via `mountebank`
 
 ## Install
 
 ```sh
-$ brew install protobuf grpcui
+$ brew install protobuf grpcui yq helmfile
 $ yarn install
 ```
 
@@ -20,4 +20,10 @@ $ yarn install
 $ yarn build
 $ (cd packages/services/cats && yarn start:dev)
 $ grpcui -plaintext 0.0.0.0:8080
+```
+
+## Deploy to local k8s
+
+```sh
+$ yarn build:docker && ./provision/deploy.sh
 ```

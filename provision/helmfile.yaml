@@ -1,0 +1,12 @@
+releases:
+  - name: cats
+    chart: ../app-0.1.0.tgz
+    values:
+    - {}
+    wait: true
+  - name: star-wars-gateway
+    chart: ../app-0.1.0.tgz
+    values:
+    - {}
+    needs: [cats]
+    wait: true
