@@ -4,18 +4,13 @@ import { promises as fs } from 'fs';
 import { readTurboHash } from './utils/read-turbo-hash';
 
 export async function turboDocker() {
-  const {
-    CI: isCI,
-    npm_package_name: pkgName,
-    TURBO_DOCKER_IMAGE_PREFIX,
-  } = cleanEnv(process.env, {
+  const { CI: isCI, npm_package_name: pkgName } = cleanEnv(process.env, {
     CI: bool({ default: false }),
     npm_package_name: str(),
-    TURBO_DOCKER_IMAGE_PREFIX: str({ default: 'test' }),
   });
 
-  const turboHash = readTurboHash();
-  const image = `${TURBO_DOCKER_IMAGE_PREFIX}/${pkgName.split('/').pop()}:${turboHash}`;
+  const { hash: turboHash, dockerImage } = readTurboHash();
+  const image = `${dockerImage}:${turboHash}`;
 
   if (isCI && (await isDockerImageExists(image))) {
     console.log(`${image} already exists`);

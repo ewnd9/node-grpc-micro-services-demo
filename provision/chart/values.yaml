@@ -1,0 +1,41 @@
+replicaCount: 1
+
+image:
+  # repository: nginx
+  # tag: 1.14.2
+  # pullPolicy: IfNotPresent
+  repository: test/star-wars-gateway
+  tag: 6cad9de513f8d777
+  pullPolicy: Never
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  # broken (failed to create resource: admission webhook "validate.nginx.ingress.kubernetes.io" denied the request: host "_" and path "/testpath" is already defined in ingress)
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

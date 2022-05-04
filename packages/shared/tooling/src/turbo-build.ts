@@ -3,8 +3,13 @@ import { cleanEnv, str } from 'envalid';
 import fs from 'fs';
 
 export async function turboBuild() {
-  const { TURBO_HASH } = cleanEnv(process.env, {
+  const {
+    TURBO_HASH,
+    TURBO_DOCKER_IMAGE_PREFIX,
+    npm_package_name: pkgName,
+  } = cleanEnv(process.env, {
     TURBO_HASH: str(),
+    TURBO_DOCKER_IMAGE_PREFIX: str({ default: 'test' }),
     npm_package_name: str(),
   });
 
@@ -13,5 +18,6 @@ export async function turboBuild() {
     stdio: 'inherit',
   });
 
-  fs.writeFileSync(`dist/turbo-hash.json`, JSON.stringify({ hash: TURBO_HASH }));
+  const dockerImage = `${TURBO_DOCKER_IMAGE_PREFIX}/${pkgName.split('/').pop()}`;
+  fs.writeFileSync(`dist/turbo-hash.json`, JSON.stringify({ hash: TURBO_HASH, dockerImage }));
 }
