@@ -12,14 +12,22 @@ deploy () {
   repository=$(cat $pkg_path/dist/turbo-hash.json | jq -r '.dockerImage')
   tag=$(cat $pkg_path/dist/turbo-hash.json | jq -r '.hash')
 
-  helm upgrade \
-    --atomic \
-    --install \
-    --set image.repository=$repository \
-    --set image.tag=$tag \
-    --set nameOverride=$pkg_name \
-    --set ingress.hosts[0]=$pkg_name.local \
-    $pkg_name ./app-0.1.0.tgz
+  flags=""
+  flags="$flags --set image.repository=$repository"
+  flags="$flags --set image.tag=$tag"
+  flags="$flags --set nameOverride=$pkg_name"
+  flags="$flags --set ingress.hosts[0]=$pkg_name.local"
+  flags="$flags $pkg_name ./app-0.1.0.tgz"
+
+  helm_diff_result=$(helm diff upgrade $flags)
+
+  if [[ ! -z $helm_diff_result ]]; then
+    echo "$pkg_name has changed:"
+    echo "$helm_diff_result"
+    helm upgrade --atomic --install $flags
+  else
+    echo "no diff for $pkg_name"
+  fi
 }
 
 deploy "cats"
