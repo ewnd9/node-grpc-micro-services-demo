@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "build:docker": "turbo run build:docker",
     "lint": "eslint packages --ext '.ts' --cache",
     "prepare": "husky install",
     "mb": "mb start --protofile ./tests/mountebank/protocols.json --datadir ./tests/mountebank/data",

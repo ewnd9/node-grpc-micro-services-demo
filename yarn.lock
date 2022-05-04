@@ -342,7 +342,7 @@ abbrev@1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
-abort-controller-x@^0.2.4:
+abort-controller-x@^0.2.4, abort-controller-x@^0.2.6:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/abort-controller-x/-/abort-controller-x-0.2.6.tgz#708d5fc50a9bccfdf04ec70e562c925cc6f5b4ad"
   integrity sha512-U8MmmcfIzl7qnzoog1woxKX/eYkQin3WR7k/S2dtpGLlSlsndXnvOYQEq8y1VnHC3+ofNFAT0GRgHq1lBbXlDQ==
@@ -2046,6 +2046,15 @@ nice-grpc-common@^1.1.0:
     node-abort-controller "^2.0.0"
     ts-error "^1.0.6"
 
+nice-grpc-server-health@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/nice-grpc-server-health/-/nice-grpc-server-health-1.1.0.tgz#da4521a803381b9cafc57d15f5d1984b8fa9e4b0"
+  integrity sha512-thti8jUcSsqlsaAaCc7wRyIBKvaqn2glOsdx258kbwFGAPyDKV5WiBoc7CEX9aCulxPvmzbpZeTew5jGvFudNg==
+  dependencies:
+    abort-controller-x "^0.2.6"
+    nice-grpc "^1.2.0"
+    typed-emitter "^2.0.0"
+
 nice-grpc-server-reflection@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/nice-grpc-server-reflection/-/nice-grpc-server-reflection-1.0.11.tgz#987b4f77c6f3ac2271bf07c03835438e1637ad59"
@@ -2060,6 +2069,16 @@ nice-grpc@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/nice-grpc/-/nice-grpc-1.1.1.tgz#fa1453894c6f1ab7bd895dad332eac974574df9d"
   integrity sha512-bsYDdnhrt+tytA2JEZAGonNxACfVlla79Q+EFD7ga1MGy9EgBwG+DyQMlaUtj6maIAAouaMOsDW2hbyunEWizg==
+  dependencies:
+    "@grpc/grpc-js" "^1.6.1"
+    abort-controller-x "^0.2.4"
+    nice-grpc-common "^1.1.0"
+    node-abort-controller "^1.2.1"
+
+nice-grpc@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/nice-grpc/-/nice-grpc-1.2.0.tgz#43b7cbf373c9bab8c21080c2c3bcd181ee9e9645"
+  integrity sha512-M5B8FE7Y9nNgOnjpD2YS7oM+iuzTLy0srrFQtleXFyJ/VWzvqa++utr6kajRMF2XprFFVXllF7xvRVD7FCjXdg==
   dependencies:
     "@grpc/grpc-js" "^1.6.1"
     abort-controller-x "^0.2.4"
@@ -2440,7 +2459,7 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-rxjs@^7.5.5:
+rxjs@^7.5.2, rxjs@^7.5.5:
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.5.tgz#2ebad89af0f560f460ad5cc4213219e1f7dd4e9f"
   integrity sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==
@@ -2918,6 +2937,13 @@ type-is@~1.6.18:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.24"
+
+typed-emitter@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/typed-emitter/-/typed-emitter-2.1.0.tgz#ca78e3d8ef1476f228f548d62e04e3d4d3fd77fb"
+  integrity sha512-g/KzbYKbH5C2vPkaXGu8DJlHrGKHLsM25Zg9WuC9pMGfuvT+X25tZQWo5fK1BjBm8+UrVE9LDCvaY0CQk+fXDA==
+  optionalDependencies:
+    rxjs "^7.5.2"
 
 typescript@^4.6.3:
   version "4.6.3"
