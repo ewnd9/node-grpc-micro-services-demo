@@ -1,6 +1,7 @@
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import { Static, TSchema } from '@sinclair/typebox';
+import AggregateError from 'aggregate-error';
 
 const ajv = addFormats(
   new Ajv({
@@ -28,12 +29,12 @@ const ajv = addFormats(
   .addKeyword('kind')
   .addKeyword('modifier');
 
-export function parse<T extends TSchema>(schema: T, data: any): Static<T> {
+export function validate<T extends TSchema>(schema: T, data: any): data is Static<T> {
   const ok = ajv.validate(schema, data);
 
-  if (ok) {
-    return data;
-  } else {
-    throw new Error(`not valid`);
+  if (!ok) {
+    throw new AggregateError(ajv.errors);
   }
+
+  return true;
 }

@@ -7,7 +7,7 @@ import {
 } from '@internal/star-wars-gateway-api/dist/star-wars';
 import axios from 'axios';
 import { Type } from '@sinclair/typebox';
-import { parse } from '@internal/schema-validator';
+import { validate } from '@internal/schema-validator';
 import { config } from './config';
 
 const StarWarsApiPerson = Type.Object({
@@ -27,7 +27,8 @@ export const starWarsServiceImpl: ServiceImplementation<typeof StarWarsServiceDe
       signal: context.signal,
     });
 
-    const persons = parse(StarWarsApiPersonList, data.results);
+    const persons = data.results;
+    validate(StarWarsApiPersonList, persons);
 
     return {
       persons,
